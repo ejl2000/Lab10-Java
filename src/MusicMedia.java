@@ -1,81 +1,116 @@
-import java.util.ArrayList;
-
 /**
- * MusicMedia represents the class for music media.
+ * Represents a piece of music media in a library.
  *
- * @author Emma, Samson
- * @version 2024
+ * @author Emma Lee, Sam Ordonez, Vandy Saxena, Chris H.
+ * @version 1.0
  */
-class MusicMedia
+public class MusicMedia
 {
-    private final String artist;
-    private final String title;
-    private final int trackCount;
-    private final int totalMinutes;
-    private final int year;
+    private final String    songArtist;
+    private final String    songTitle;
+    private final int       totalNumberOfSongs;
+    private final int       totalRuntimeMins;
+    private final int       yearReleased;
+
+    private static final int MIN_NUM_OF_SONGS = 0;
+    private static final int MIN_SONG_RUNTIME_MINUTES = 0;
+    private static final int MIN_YEAR = 0;
 
     /**
-     * Constructs a MusicMedia object.
+     * Constructs a MusicMedia object with the provided details.
      *
-     * @param artist      The artist of the music.
-     * @param title       The title of the music.
-     * @param trackCount  The number of tracks in the music.
-     * @param totalMinutes The total duration of the music in minutes.
-     * @param year        The year the music was released.
-     * @throws IllegalArgumentException if any argument is invalid.
+     * @param songArtist        The artist of the song.
+     * @param songTitle         The title of the song.
+     * @param totalNumberOfSongs    The total number of songs in the album.
+     * @param totalRuntimeMins     The total runtime of the album in minutes.
+     * @param yearReleased      The year the album was released.
+     * @throws IllegalArgumentException if any of the provided data is invalid.
      */
-    public MusicMedia(final String artist, final String title, final int trackCount, final int totalMinutes, int year)
+    public MusicMedia(final String  songArtist,
+                      final String  songTitle,
+                      final int     totalNumberOfSongs,
+                      final int     totalRuntimeMins,
+                      final int     yearReleased)
     {
-        if (artist == null || title == null || trackCount <= 0 || totalMinutes <= 0 || year <= 0)
-        {
-            throw new IllegalArgumentException("Invalid arguments for MusicMedia constructor");
-        }
+        this.songArtist             = songArtist;
+        this.songTitle              = songTitle;
+        this.totalNumberOfSongs     = totalNumberOfSongs;
+        this.totalRuntimeMins       = totalRuntimeMins;
+        this.yearReleased           = yearReleased;
 
-        this.artist = artist;
-        this.title = title;
-        this.trackCount = trackCount;
-        this.totalMinutes = totalMinutes;
-        this.year = year;
-    }
-
-
-    public String getArtist()
-    {
-        return artist;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public int getTrackCount()
-    {
-        return trackCount;
-    }
-
-    public int getTotalMinutes()
-    {
-        return totalMinutes;
-    }
-
-    public int getYear()
-    {
-        return year;
+        validateMusicMediaInput();
     }
 
     /**
-     * Displays a message when the music is played.
+     * Validates the data of the MusicMedia object and throws an IllegalArgumentException if any data is invalid.
+     *
+     * @throws IllegalArgumentException if an invalid data is entered
      */
-    public void playSelection()
+    private void validateMusicMediaInput()
     {
-        System.out.println("Thank you for using our Music Library.");
+        if(songArtist == null || songTitle == null || totalNumberOfSongs <= MIN_NUM_OF_SONGS || totalRuntimeMins <= MIN_SONG_RUNTIME_MINUTES || yearReleased <= MIN_YEAR)
+        {
+            throw new IllegalArgumentException("Invalid data entered " + songArtist);
+        }
     }
 
+    /**
+     * Returns the artist of the song.
+     */
+    public String getSongArtist()
+    {
+        return songArtist;
+    }
+
+    /**
+     * Returns the title of the song.
+     */
+    public String getSongTitle()
+    {
+        return songTitle;
+    }
+
+    /**
+     * Returns the total number of songs on the album.
+     */
+    public int getTotalNumberOfSongs()
+    {
+        return totalNumberOfSongs;
+    }
+
+    /**
+     * Returns the total runtime of the album in minutes.
+     */
+    public int getTotalRuntimeMins()
+    {
+        return totalRuntimeMins;
+    }
+
+    /**
+     * Returns the year the album was released.
+     */
+    public int getYearReleased()
+    {
+        return yearReleased;
+    }
+
+    /**
+     * Returns a String representation of the MusicMedia object.
+     *
+     * @return a String representation of the MusicMedia object.
+     */
     @Override
     public String toString()
     {
-        return "toString()=Album [Artist=" + artist + ", title=" + title + ", trackCount=" + trackCount + ", totalMinutes=" + totalMinutes + "]";
+        return String.format("toString()=Album [Artist=%s, title=%s, trackCount=%d, totalMinutes=%d]",
+                getSongArtist(), getSongTitle(), getTotalNumberOfSongs(), getTotalRuntimeMins());
+    }
+
+    /**
+     * Displays a message thanking the user for using the Music Library.
+     */
+    public void playSection()
+    {
+        System.out.println("Thank you for using our Music Library.");
     }
 }
-

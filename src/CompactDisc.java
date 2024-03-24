@@ -1,44 +1,63 @@
 /**
- * Represents a compact disc in the music library.
+ * Represents a compact disc (CD), extending the MusicMedia class.
+ * This class provides functionalities to create and manipulate CDs.
+ * Extends the MusicMedia class to inherit common attributes and methods.
  *
- * @author Emma, Samson
+ * @author Emma Lee, Sam Ordonez, Vandy Saxena, Chris H.
  * @version 2024
  */
-class CompactDisc extends MusicMedia
+public class CompactDisc extends MusicMedia
 {
-    private boolean bonusTracks;
-    private boolean digipac;
+    // Declaring private instance variables
+    private final boolean hasBonusTracks; // Indicates whether the CD has bonus tracks
+    private final boolean hasDigipac; // Indicates whether the CD has a digipac packaging
 
     /**
-     * Constructs a CompactDisc object.
+     * Constructs a CompactDisc object with the specified attributes.
      *
-     * @param artist      The artist of the compact disc.
-     * @param title       The title of the compact disc.
-     * @param trackCount  The number of tracks in the compact disc.
-     * @param totalMinutes The total duration of the compact disc in minutes.
-     * @param year        The year the compact disc was released.
-     * @param bonusTracks Indicates if the compact disc has bonus tracks.
-     * @param digipac     Indicates if the compact disc comes in digipac format.
+     * @param songArtist         The artist of the songs in the CD.
+     * @param songTitle          The title of the CD.
+     * @param totalNumberOfSongs The total number of songs in the CD.
+     * @param totalRuntimeMins   The total runtime of the CD in minutes.
+     * @param yearReleased       The year the CD was released.
+     * @param hasBonusTracks     Indicates whether the CD has bonus tracks.
+     * @param hasDigipac         Indicates whether the CD has a digipac packaging.
      */
-    public CompactDisc(final String artist, final String title, final int trackCount, final int totalMinutes, final int year, final boolean bonusTracks, final boolean digipac)
+    public CompactDisc(final String songArtist,
+                       final String songTitle,
+                       final int totalNumberOfSongs,
+                       final int totalRuntimeMins,
+                       final int yearReleased,
+                       final boolean hasBonusTracks,
+                       final boolean hasDigipac)
     {
-        super(artist, title, trackCount, totalMinutes, year);
-
-        this.bonusTracks = bonusTracks;
-        this.digipac = digipac;
+        // Call the constructor of the parent class (MusicMedia) to initialize common attributes
+        super(songArtist, songTitle, totalNumberOfSongs, totalRuntimeMins, yearReleased);
+        this.hasBonusTracks = hasBonusTracks; // Set the hasBonusTracks attribute
+        this.hasDigipac = hasDigipac; // Set the hasDigipac attribute
     }
 
-    @Override
-    public void playSelection()
-    {
-        System.out.println("Thank you for using our Music Library.");
-        System.out.println("You selected the CD " + getTitle() + " by " + getArtist() + ".");
-        System.out.println("This is a Compact Disc from the year " + getYear() + ".");
-    }
-
+    /**
+     * Generates a String representation of the CompactDisc object.
+     *
+     * @return A String representation of the CompactDisc object.
+     */
     @Override
     public String toString()
     {
-        return "CompactDisc [bonusTracks=" + bonusTracks + ", digipac=" + digipac + ", " + super.toString() + "]";
+        // Format and return a string representation of the CompactDisc object
+        return String.format("CompactDisc [bonusTracks=%b, digipac=%b, %s]", hasBonusTracks, hasDigipac, super.toString());
+    }
+
+    /**
+     * Plays a section of the CD and overrides the playSection method from the MusicMedia class.
+     */
+    @Override
+    public void playSection()
+    {
+        // Display information about the selected CD
+        System.out.println("Thank you for using our Music Library.");
+        System.out.println("You selected the CD " + getSongTitle() + " by " + getSongArtist() + ".");
+        System.out.println("This is a Compact Disc from the year " + getYearReleased() + ".");
     }
 }

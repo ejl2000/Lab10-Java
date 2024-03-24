@@ -1,47 +1,81 @@
 /**
- * Represents an audio file in the music library.
+ * Represents an audio file, extending the MusicMedia class.
+ * This class provides functionalities to create and manipulate audio files.
+ * Extends the MusicMedia class to inherit common attributes and methods.
  *
- * @author Emma, Samosn
+ * @author Emma Lee, Sam Ordonez, Vandy Saxena, Chris H.
  * @version 2024
  */
-class AudioFile extends MusicMedia
+public class AudioFile extends MusicMedia
 {
-    private final String fileType;
+    // Declaring private instance variables
+    private final String fileType; // Type of the audio file (e.g., mp3, m4a, wav)
+
+    // Declaring constant variables for supported file extensions
+    private static final String FILE_EXT_MP3 = "mp3";
+    private static final String FILE_EXT_M4A = "m4a";
+    private static final String FILE_EXT_WAV = "wav";
 
     /**
-     * Constructs an AudioFile object.
+     * Constructs an AudioFile object with the specified attributes.
      *
-     * @param artist      The artist of the audio file.
-     * @param title       The title of the audio file.
-     * @param trackCount  The number of tracks in the audio file.
-     * @param totalMinutes The total duration of the audio file in minutes.
-     * @param year        The year the audio file was released.
-     * @param fileType    The file type of the audio file.
-     * @throws IllegalArgumentException if any argument is invalid.
+     * @param songArtist          The artist of the song.
+     * @param songTitle           The title of the song.
+     * @param totalNumberOfSongs  The total number of songs in the audio file.
+     * @param totalRuntimeMins    The total runtime of the audio file in minutes.
+     * @param yearReleased        The year the audio file was released.
+     * @param fileType            The type of the audio file.
      */
-    public AudioFile(final String artist, final String title, final int trackCount, final int totalMinutes, final int year, final String fileType)
+    public AudioFile(final String songArtist,
+                     final String songTitle,
+                     final int totalNumberOfSongs,
+                     final int totalRuntimeMins,
+                     final int yearReleased,
+                     final String fileType)
     {
-        super(artist, title, trackCount, totalMinutes, year);
+        // Call the constructor of the parent class (MusicMedia) to initialize common attributes
+        super(songArtist, songTitle, totalNumberOfSongs, totalRuntimeMins, yearReleased);
+        this.fileType = fileType; // Set the fileType attribute
+        validateFileType(); // Validate the fileType
+    }
 
-        if (!fileType.equals("mp3") && !fileType.equals("m4a") && !fileType.equals("wav"))
+    /**
+     * Validates the file type and throws an exception if an invalid file type is entered.
+     *
+     * @throws IllegalArgumentException if an invalid file type is entered
+     */
+    private void validateFileType()
+    {
+        // Check if the fileType is not equal to any of the supported file extensions
+        if (!fileType.equalsIgnoreCase(FILE_EXT_MP3)
+                && !fileType.equalsIgnoreCase(FILE_EXT_M4A)
+                && !fileType.equalsIgnoreCase(FILE_EXT_WAV))
         {
-            throw new IllegalArgumentException("Invalid fileType for AudioFile");
+            throw new IllegalArgumentException("Invalid file type entered"); // Throw exception for invalid file type
         }
-
-        this.fileType = fileType;
     }
 
-    @Override
-    public void playSelection()
-    {
-        System.out.println("Thank you for using our Music Library.");
-        System.out.println("You selected the Audio File " + getTitle() + " by " + getArtist() + ".");
-        System.out.println("This file is in " + fileType + " format, from the year " + getYear() + ".");
-    }
-
+    /**
+     * Generates a string representation of the AudioFile object.
+     *
+     * @return A string representation of the AudioFile object.
+     */
     @Override
     public String toString()
     {
-        return "AudioFile [fileType=" + fileType + ", " + super.toString() + "]";
+        // Format and return a string representation of the AudioFile object
+        return String.format("AudioFile [fileType=%s, %s]", fileType, super.toString());
+    }
+
+    /**
+     * Plays a section of the audio file and overrides the playSection method from the MusicMedia class.
+     */
+    @Override
+    public void playSection()
+    {
+        // Display information about the selected audio file
+        System.out.println("Thank you for using our Music Library.");
+        System.out.println("You selected the Audio File " + getSongTitle() + " by " + getSongArtist() + ".");
+        System.out.println("This file is in " + fileType + " format, from the year " + getYearReleased() + ".");
     }
 }
