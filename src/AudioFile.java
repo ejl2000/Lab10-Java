@@ -8,10 +8,10 @@
  */
 public class AudioFile extends MusicMedia
 {
-    // Declaring private instance variables
+    // Declare private instance variables
     private final String fileType; // Type of the audio file (e.g., mp3, m4a, wav)
 
-    // Declaring constant variables for supported file extensions
+    // Declare constant variables for supported file extensions
     private static final String FILE_EXT_MP3 = "mp3";
     private static final String FILE_EXT_M4A = "m4a";
     private static final String FILE_EXT_WAV = "wav";

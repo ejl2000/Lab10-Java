@@ -8,7 +8,7 @@
  */
 public class CompactDisc extends MusicMedia
 {
-    // Declaring private instance variables
+    // Declare private instance variables
     private final boolean hasBonusTracks; // Indicates whether the CD has bonus tracks
     private final boolean hasDigipac; // Indicates whether the CD has a digipac packaging
 
